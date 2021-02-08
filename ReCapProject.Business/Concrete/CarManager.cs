@@ -5,6 +5,7 @@ using System.Text;
 using ReCapProject.Business.Abstract;
 using ReCapProject.DataAccess.Abstract;
 using ReCapProject.Entities.Concrete;
+using ReCapProject.Entities.DTOs;
 
 namespace ReCapProject.Business.Concrete
 {
@@ -15,44 +16,44 @@ namespace ReCapProject.Business.Concrete
         {
             _carDal = carDal;
         }
-
-        public List<Car> GetAllCars()
+        public List<Car> GetAllService()
         {
             return _carDal.GetAll();
         }
 
-        public List<Car> GetCarsByBrandId(int brandId)
+        public Car GetById(int id)
         {
-            return _carDal.GetAll(p => p.BrandId == brandId);
+            return _carDal.Get(p => p.CarId == id);
         }
 
-        public List<Car> GetCarsByColorId(int colorId)
+        public void AddService(Car entity)
         {
-            return _carDal.GetAll(p => p.ColorId == colorId);
-        }
-
-        public void AddCarToSystem(Car car)
-        {
-            if (car.Descriptions.Length <= 10 || car.DailyPrice<0)
+            
+            if (entity.Descriptions.Length <= 10 || entity.DailyPrice < 0)
             {
                 Console.WriteLine("1-Eklemek istediğiniz araç için açıklama kısmı 10 karakterden fazla olmalıdır,\n" +
                                   "2-Eklenecek olan aracın fiyatı 0'dan düşük olmamalıdır. ");
                 return;
             }
-            _carDal.Add(car);
-            
-            
-
+            _carDal.Add(entity);
+            Console.WriteLine("Araba kaydı başarıyla oluşturuldu");
         }
 
-        public void UpdateCarInSystem(Car car)
+        public void UpdateService(Car entity)
         {
-            _carDal.Update(car);
+            _carDal.Update(entity);
+            Console.WriteLine("Araba kaydı başarıyla güncellendi");
         }
 
-        public void DeleteCarFromSystem(Car car)
+        public void DeleteService(Car entity)
         {
-            _carDal.Delete(car);
+            _carDal.Delete(entity);
+            Console.WriteLine("Araba kaydı başarıyla silindi");
+        }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
     }
 }

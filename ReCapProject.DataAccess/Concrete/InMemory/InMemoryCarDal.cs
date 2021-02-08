@@ -6,6 +6,7 @@ using System.Linq.Expressions;
 using System.Text;
 using ReCapProject.DataAccess.Abstract;
 using ReCapProject.Entities.Concrete;
+using ReCapProject.Entities.DTOs;
 
 namespace ReCapProject.DataAccess.Concrete.InMemory
 {
@@ -16,15 +17,15 @@ namespace ReCapProject.DataAccess.Concrete.InMemory
         {
             _cars = new List<Car>
             {
-                new Car() {CarId = 1, BrandId = 1, ColorId = 1, DailyPrice = 118.750, ModelYear = 2013,
+                new Car() {CarId = 1, BrandId = 1, ColorId = 1, DailyPrice = 118750, ModelYear = "2013",
                     Descriptions = "DEĞİŞENSİZ TRAMERSİZ 2 PARÇA BOYALI RENAULT CLIO"},
-                new Car() {CarId = 2, BrandId = 1, ColorId = 1, DailyPrice = 184.000, ModelYear = 2019,
+                new Car() {CarId = 2, BrandId = 1, ColorId = 1, DailyPrice = 184000, ModelYear = "2019",
                     Descriptions = "HATASIZ BOYASIZ TESLA EKRANLI ÇELİK JANTLI RENAULT MEGANE"},
-                new Car() {CarId = 3, BrandId = 1, ColorId = 2, DailyPrice =42.000, ModelYear = 1992,
+                new Car() {CarId = 3, BrandId = 1, ColorId = 2, DailyPrice =42000, ModelYear = "1992",
                     Descriptions = "OTOMATİK KLİMALI CLIO"},
-                new Car() {CarId = 4, BrandId = 2, ColorId = 3, DailyPrice = 98.500, ModelYear = 2009,
+                new Car() {CarId = 4, BrandId = 2, ColorId = 3, DailyPrice = 98500, ModelYear = "2009",
                     Descriptions = "DOĞAN OTOMOTİVDEN SUNROOF DEĞİŞENSİZ HASAR KAYITSIZ CITROEN C5"},
-                new Car() {CarId = 5, BrandId = 2, ColorId = 4, DailyPrice = 208.000, ModelYear = 2020,
+                new Car() {CarId = 5, BrandId = 2, ColorId = 4, DailyPrice = 208000, ModelYear = "2020",
                     Descriptions = "Sahibinden tertemiz c3"}
 
             };
@@ -64,6 +65,12 @@ namespace ReCapProject.DataAccess.Concrete.InMemory
             var carToDelete = _cars.SingleOrDefault(p => p.CarId == car.CarId);
             _cars.Remove(carToDelete);
         }
+
+        public List<CarDetailDto> GetCarDetails()
+        {
+            throw new NotImplementedException();
+        }
+
         public void Update(Car car)
         {
             var carToUpdate = _cars.SingleOrDefault(p => p.CarId == car.CarId);
