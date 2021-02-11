@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using ReCapProject.Business.Abstract;
+using ReCapProject.Business.Constants;
+using ReCapProject.Core.Utilities.Results;
 using ReCapProject.DataAccess.Abstract;
 using ReCapProject.Entities.Concrete;
 
@@ -10,38 +12,47 @@ namespace ReCapProject.Business.Concrete
     public class ColorManager:IColorService
     {
         private IColorDal _colorDal;
+        private int hour=04;
 
         public ColorManager(IColorDal colorDal)
         {
             _colorDal = colorDal;
         }
 
-        public List<Color> GetAllService()
+        public IDataResult<List<Color>> GetAllService()
         {
-            return _colorDal.GetAll();
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<List<Color>>(ColorMessages.Maintenance);
+            }
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), ColorMessages.ColorsListed);
         }
 
-        public Color GetById(int id)
+        public IDataResult<Color> GetById(int id)
         {
-            return _colorDal.Get(c => c.ColorId == id);
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<Color>(ColorMessages.Maintenance);
+            }
+            return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == id), ColorMessages.ColorsListed);
         }
 
-        public void AddService(Color entity)
+        public IResult AddService(Color entity)
         {
             _colorDal.Add(entity);
-            Console.WriteLine("\n Renk kaydı başarıyla oluşturuldu");
+            return new SuccessResult(ColorMessages.ColorAdded);
         }
 
-        public void UpdateService(Color entity)
+        public IResult UpdateService(Color entity)
         {
             _colorDal.Update(entity);
-            Console.WriteLine("\n Renk kaydı başarıyla güncellendi");
+            return new SuccessResult(ColorMessages.ColorUpdated);
         }
 
-        public void DeleteService(Color entity)
+        public IResult DeleteService(Color entity)
         {
             _colorDal.Delete(entity);
-            Console.WriteLine("\n Renk kaydı başarıyla silindi");
+            return new SuccessResult(ColorMessages.ColorDeleted);
         }
     }
 }

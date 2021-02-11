@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 using ReCapProject.Business.Abstract;
+using ReCapProject.Business.Constants;
+using ReCapProject.Core.Utilities.Results;
 using ReCapProject.DataAccess.Abstract;
 using ReCapProject.DataAccess.Concrete.EntityFramework;
 using ReCapProject.Entities.Concrete;
@@ -11,38 +13,48 @@ namespace ReCapProject.Business.Concrete
     public class BrandManager:IBrandService
     {
         private IBrandDal _brandDal;
-
+        private int hour = 03;
         public BrandManager(IBrandDal brandDal)
         {
             _brandDal = brandDal;
         }
 
-        public List<Brand> GetAllService()
+        public IDataResult<List<Brand>> GetAllService()
         {
-            return _brandDal.GetAll();
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<List<Brand>>(BrandMessages.Maintenance);
+            }
+            return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), BrandMessages.BrandListed);
         }
 
-        public Brand GetById(int id)
+        public IDataResult<Brand> GetById(int id)
         {
-            return _brandDal.Get(p => p.BrandId == id);
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<Brand>(BrandMessages.Maintenance);
+            }
+            return new SuccessDataResult<Brand>(_brandDal.Get(p => p.BrandId == id), BrandMessages.BrandListed);
+            
         }
 
-        public void AddService(Brand entity)
+        public IResult AddService(Brand entity)
         {
             _brandDal.Add(entity);
-            Console.WriteLine("\n Marka kaydı başarıyla oluşturuldu");
+            return new SuccessResult(BrandMessages.BrandAdded);
         }
 
-        public void UpdateService(Brand entity)
+        public IResult UpdateService(Brand entity)
         {
             _brandDal.Update(entity);
-            Console.WriteLine("\n Marka kaydı başarıyla güncellendi");
+            return new SuccessResult(BrandMessages.BrandUpdated);
         }
 
-        public void DeleteService(Brand entity)
+        public IResult DeleteService(Brand entity)
         {
             _brandDal.Delete(entity);
-            Console.WriteLine("\n Marka kaydı başarıyla silindi");
+            return new SuccessResult(BrandMessages.BrandDeleted);
         }
     }
+
 }

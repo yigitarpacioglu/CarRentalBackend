@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using ReCapProject.Business.Abstract;
+using ReCapProject.Business.Constants;
+using ReCapProject.Core.Utilities.Results;
 using ReCapProject.DataAccess.Abstract;
 using ReCapProject.Entities.Concrete;
 using ReCapProject.Entities.DTOs;
@@ -11,49 +13,61 @@ namespace ReCapProject.Business.Concrete
 {
     public class CarManager:ICarService
     {
+        private int hour = 03;
         private ICarDal _carDal;
         public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
         }
-        public List<Car> GetAllService()
+        public IDataResult<List<Car>> GetAllService()
         {
-            return _carDal.GetAll();
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<List<Car>>(CarMessages.Maintenance);
+            }
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), CarMessages.CarsListed);
         }
 
-        public Car GetById(int id)
+        public IDataResult<Car> GetById(int id)
         {
-            return _carDal.Get(p => p.CarId == id);
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<Car>(CarMessages.Maintenance);
+            }
+            return new SuccessDataResult<Car>(_carDal.Get(p => p.CarId == id), CarMessages.CarsListed);
+            
         }
 
-        public void AddService(Car entity)
+        public IResult AddService(Car entity)
         {
             
             if (entity.Descriptions.Length <= 10 || entity.DailyPrice < 0)
             {
-                Console.WriteLine("1-Eklemek istediğiniz araç için açıklama kısmı 10 karakterden fazla olmalıdır,\n" +
-                                  "2-Eklenecek olan aracın fiyatı 0'dan düşük olmamalıdır. ");
-                return;
+                return new ErrorResult(CarMessages.CarAddError);
             }
             _carDal.Add(entity);
-            Console.WriteLine("Araba kaydı başarıyla oluşturuldu");
+            return new SuccessResult(CarMessages.CarAdded);
         }
 
-        public void UpdateService(Car entity)
+        public IResult UpdateService(Car entity)
         {
             _carDal.Update(entity);
-            Console.WriteLine("Araba kaydı başarıyla güncellendi");
+            return new SuccessResult(CarMessages.CarUpdated);
         }
 
-        public void DeleteService(Car entity)
+        public IResult DeleteService(Car entity)
         {
             _carDal.Delete(entity);
-            Console.WriteLine("Araba kaydı başarıyla silindi");
+            return new SuccessResult(CarMessages.CarDeleted);
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return _carDal.GetCarDetails();
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>(CarMessages.Maintenance);
+            }
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), CarMessages.CarAdded);
         }
     }
 }
