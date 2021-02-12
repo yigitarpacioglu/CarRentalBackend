@@ -2,7 +2,16 @@
 ### İkinci El Araç Satış Platformu
 
 ## Son Güncellemeler
-!! 
+!! Users tablosu oluşturuldu. 
+!! Customers tablosu oluşturuldu 
+!! Rentals tablosu oluşturuldu ve Key atamaları yapıldı.
+!! Projede tablolardaki elemanlara karşılık gelecek Entity'ler oluşturuldu.
+!! Yeni DAL araçları için CRUD operasyonları yazıldı.
+!! Yeni kullanıcılar, müşteriler ve kira kayıtları oluşturuldu.
+!! Program.cs üzerinde yeni test operasyonları eklendi.
+!! Kiralama imkanı kod üzerinde gerçekleştirildi.
+!! Eğer araç ofis tarafından teslim alınmamışsa, yeni kiralama işlemi yapılması engellendi.
+
 
 ## Core
 IEntity, IDto, IEntityRepository, EfEntityRepositoryBase yapıları bu katman içerisinde oluşturuldu.
