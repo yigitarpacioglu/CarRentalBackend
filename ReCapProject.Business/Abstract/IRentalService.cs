@@ -8,9 +8,10 @@ using ReCapProject.Entities.DTOs;
 
 namespace ReCapProject.Business.Abstract
 {
-    public interface ICarService:ICrudServices<Car>
+    public interface IRentalService:ICrudServices<Rental>
     {
-        IDataResult<List<CarDetailDto>> GetCarDetailsService();
-        IDataResult<CarDetailDto> GetCarDetailsByIdService(int id);
+        IDataResult<List<RentDetailDto>> GetRentalDetails();
+        
+
     }
 }

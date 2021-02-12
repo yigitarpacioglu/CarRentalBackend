@@ -23,7 +23,7 @@ namespace ReCapProject.Business.Concrete
         {
             if (DateTime.Now.Hour == hour)
             {
-                return new ErrorDataResult<List<Color>>(ColorMessages.Maintenance);
+                return new ErrorDataResult<List<Color>>(GeneralMessages.Maintenance);
             }
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), ColorMessages.ColorsListed);
         }
@@ -32,7 +32,7 @@ namespace ReCapProject.Business.Concrete
         {
             if (DateTime.Now.Hour == hour)
             {
-                return new ErrorDataResult<Color>(ColorMessages.Maintenance);
+                return new ErrorDataResult<Color>(GeneralMessages.Maintenance);
             }
             return new SuccessDataResult<Color>(_colorDal.Get(c => c.ColorId == id), ColorMessages.ColorsListed);
         }

@@ -23,7 +23,7 @@ namespace ReCapProject.Business.Concrete
         {
             if (DateTime.Now.Hour == hour)
             {
-                return new ErrorDataResult<List<Brand>>(BrandMessages.Maintenance);
+                return new ErrorDataResult<List<Brand>>(GeneralMessages.Maintenance);
             }
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), BrandMessages.BrandListed);
         }
@@ -32,7 +32,7 @@ namespace ReCapProject.Business.Concrete
         {
             if (DateTime.Now.Hour == hour)
             {
-                return new ErrorDataResult<Brand>(BrandMessages.Maintenance);
+                return new ErrorDataResult<Brand>(GeneralMessages.Maintenance);
             }
             return new SuccessDataResult<Brand>(_brandDal.Get(p => p.BrandId == id), BrandMessages.BrandListed);
             

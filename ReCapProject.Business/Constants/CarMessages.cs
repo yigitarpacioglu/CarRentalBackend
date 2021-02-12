@@ -6,11 +6,10 @@ namespace ReCapProject.Business.Constants
 {
     public static class CarMessages
     {
-        public static string CarAdded = "Araç ilanı eklendi";
-        public static string CarUpdated = "Araç ilanı güncellendi";
-        public static string CarDeleted = "Araç ilanı silindi";
-        public static string CarAddError = "Araç adı 2 karakterden fazla olmalı ve günlük kiralama bedeli için negatif değer girilmemelidir.";
-        public static string CarsListed = "Araç/Araçlar listelendi.";
-        public static string Maintenance = "Sistem bakımdadır.";
+        public static string CarAdded = "Car has been added";
+        public static string CarUpdated = "Car has been updated";
+        public static string CarDeleted = "Car has been deleted";
+        public static string CarAddError = "Car name must not be less than 2 letter or Daily Price value must be positive";
+        public static string CarsListed = "Car/Cars added";
     }
 }

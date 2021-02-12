@@ -7,10 +7,9 @@ namespace ReCapProject.Business.Constants
 {
     public static class ColorMessages
     {
-        public static string ColorAdded = "Renk kaydı başarıyla oluşturuldu";
-        public static string ColorUpdated = "Renk kaydı güncellendi";
-        public static string ColorDeleted = "Renk kaydı silindi";
-        public static string ColorsListed = "Renk/Renkler listelendi.";
-        public static string Maintenance= "Sistem bakımdadır.";
+        public static string ColorAdded = "Color has been added";
+        public static string ColorUpdated = "Color has been updated";
+        public static string ColorDeleted = "Color has been deleted";
+        public static string ColorsListed = "Color/Colors listed";
     }
 }
