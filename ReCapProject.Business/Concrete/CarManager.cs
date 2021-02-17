@@ -41,7 +41,7 @@ namespace ReCapProject.Business.Concrete
         public IResult AddService(Car entity)
         {
             
-            if (entity.Descriptions.Length <= 10 || entity.DailyPrice < 0)
+            if (entity.Descriptions.Length <= 2 || entity.DailyPrice < 0)
             {
                 return new ErrorResult(CarMessages.CarAddError);
             }
