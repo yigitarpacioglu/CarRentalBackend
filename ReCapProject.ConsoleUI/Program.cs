@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.Mime;
+using System.Reflection;
 using Microsoft.Extensions.Logging;
 using ReCapProject.Business.Concrete;
 using ReCapProject.Core.Utilities.Results;
@@ -65,96 +68,99 @@ namespace ReCapProject.ConsoleUI
             // GetCarDetailsDto();
 
 
-            User user = new User // Creating new account
-            {
-                FirstName = "Sabri",
-                LastName = "Arpacıoğlu",
-                Email = "sabriarpacioglu@gmail.com",
-                Password = "456789"
-            };
+            //User user = new User // Creating new account
+            //{
+            //    FirstName = "Sabri",
+            //    LastName = "Arpacıoğlu",
+            //    Email = "sabriarpacioglu@gmail.com",
+            //    Password = "456789"
+            //};
             
-            AddServiceForUser(user); // Signing up to system as user
+            //AddServiceForUser(user); // Signing up to system as user
 
-            CarManager carManager = new CarManager(new EfCarDal());
+            //CarManager carManager = new CarManager(new EfCarDal());
             
 
-            var getDetailsResult = carManager.GetCarDetailsService(); // Listing Car Details
-            if (getDetailsResult.Success == true)
-            {
-                Console.WriteLine(carManager.GetCarDetailsService().Message);
-                foreach (var detail in getDetailsResult.Data)
-                {
-                    Console.WriteLine(" " + detail.BrandName + " " + detail.Description + "\n Color: " +
-                                      detail.ColorName +
-                                      "\n Daily Price: " + detail.DailyPrice + " (TL/Day)\n");
-                    Console.WriteLine("---------------------------------------\n\n\n\n");
-                }
-            }
-            else
-            {
-                Console.WriteLine(getDetailsResult.Message);
-            }
+            //var getDetailsResult = carManager.GetCarDetailsService(); // Listing Car Details
+            //if (getDetailsResult.Success == true)
+            //{
+            //    Console.WriteLine(carManager.GetCarDetailsService().Message);
+            //    foreach (var detail in getDetailsResult.Data)
+            //    {
+            //        Console.WriteLine(" " + detail.BrandName + " " + detail.Description + "\n Color: " +
+            //                          detail.ColorName +
+            //                          "\n Daily Price: " + detail.DailyPrice + " (TL/Day)\n");
+            //        Console.WriteLine("---------------------------------------\n\n\n\n");
+            //    }
+            //}
+            //else
+            //{
+            //    Console.WriteLine(getDetailsResult.Message);
+            //}
 
-            Car selectedCar = new Car // Car selected
-            {
-                CarId = 29
-            };
+            //Car selectedCar = new Car // Car selected
+            //{
+            //    CarId = 29
+            //};
 
-            var selectedCarResult = carManager.GetCarDetailsByIdService(selectedCar.CarId);   // Details have been revealed
+            //var selectedCarResult = carManager.GetCarDetailsByIdService(selectedCar.CarId);   // Details have been revealed
             
-            var data = selectedCarResult.Data;
+            //var data = selectedCarResult.Data;
 
-            if (selectedCarResult.Success == true)
-            {
-                Console.WriteLine(selectedCarResult.Message);
+            //if (selectedCarResult.Success == true)
+            //{
+            //    Console.WriteLine(selectedCarResult.Message);
                 
-                    Console.WriteLine("\t\t Selected Car: " + data.BrandName + " " + data.Description +
-                                      "\n\t\t Color: " + data.ColorName +
-                                      "\n\t\t Daily Price: " + data.DailyPrice + " (TL/Day)\n");
-                    Console.WriteLine("---------------------------------------\n");                
-            }
-            else
-            {
-                Console.WriteLine(selectedCarResult.Message);
-            }
+            //        Console.WriteLine("\t\t Selected Car: " + data.BrandName + " " + data.Description +
+            //                          "\n\t\t Color: " + data.ColorName +
+            //                          "\n\t\t Daily Price: " + data.DailyPrice + " (TL/Day)\n");
+            //        Console.WriteLine("---------------------------------------\n");                
+            //}
+            //else
+            //{
+            //    Console.WriteLine(selectedCarResult.Message);
+            //}
 
-            CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
+            //CustomerManager customerManager = new CustomerManager(new EfCustomerDal());
 
-            var customerAddResult = customerManager.AddService(new Customer          //Decided to rent a car
-            {
-                UserId = 52,
-                CompanyName = "Edremit ASM"
-            });
+            //var customerAddResult = customerManager.AddService(new Customer          //Decided to rent a car
+            //{
+            //    UserId = 52,
+            //    CompanyName = "Edremit ASM"
+            //});
             
-            Console.WriteLine(customerAddResult.Message);
+            //Console.WriteLine(customerAddResult.Message);
 
-            RentalManager rentalManager = new RentalManager(new EfRentalDal()); // Car has been rent
+            //RentalManager rentalManager = new RentalManager(new EfRentalDal()); // Car has been rent
 
             
-            var rent1Result = rentalManager.AddService(new Rental
-            {
-                CarId = selectedCar.CarId,
-                CustomerId = 22,
-                RentDate = DateTime.Now,
-            });
-            Console.WriteLine("\n\n" + rent1Result.Message);
+            //var rent1Result = rentalManager.AddService(new Rental
+            //{
+            //    CarId = selectedCar.CarId,
+            //    CustomerId = 22,
+            //    RentDate = DateTime.Now,
+            //});
+            //Console.WriteLine("\n\n" + rent1Result.Message);
 
-            rentalManager.UpdateService(new Rental
-            {
-                CarId = 15,
-                CustomerId = 21,
-                RentDate = DateTime.Now.AddDays(5),
-            });
+            //rentalManager.UpdateService(new Rental
+            //{
+            //    CarId = 15,
+            //    CustomerId = 21,
+            //    RentDate = DateTime.Now.AddDays(5),
+            //});
 
-            string returnDate;
-            var res = rentalManager.GetRentalDetails();
-            foreach (var rental in res.Data)
-            {
-                returnDate = (rental.ReturnDate != null) ? (rental.ReturnDate.ToString()) : ("Araç teslim edilmemiştir");
-                Console.WriteLine("\n Name          : " + rental.CustomerName+"\n Rented Vehicle: "+rental.Car
-                                  +"\n Rent Date: " + rental.RentDate+"  -  Return Date: "+rental.ReturnDate+"\t\t Daily Price: "
-                                  +rental.DailyPrice+" (Tl/day)" );
-            }
+            //string returnDate;
+            //var res = rentalManager.GetRentalDetails();
+            //foreach (var rental in res.Data)
+            //{
+            //    returnDate = (rental.ReturnDate != null) ? (rental.ReturnDate.ToString()) : ("Araç teslim edilmemiştir");
+            //    Console.WriteLine("\n Name          : " + rental.CustomerName+"\n Rented Vehicle: "+rental.Car
+            //                      +"\n Rent Date: " + rental.RentDate+"  -  Return Date: "+rental.ReturnDate+"\t\t Daily Price: "
+            //                      +rental.DailyPrice+" (Tl/day)" );
+            //}
+            Console.WriteLine(Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName+"\\");
+            
+            
 
         }
     

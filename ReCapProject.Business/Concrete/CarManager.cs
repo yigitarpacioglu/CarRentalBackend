@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.IO;
 using System.Linq;
 using System.Text;
 using FluentValidation;
@@ -26,6 +27,7 @@ namespace ReCapProject.Business.Concrete
         }
         public IDataResult<List<Car>> GetAllService()
         {
+            
             if (DateTime.Now.Hour == hour)
             {
                 return new ErrorDataResult<List<Car>>(GeneralMessages.Maintenance);

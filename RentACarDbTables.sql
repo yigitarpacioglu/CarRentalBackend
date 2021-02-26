@@ -45,6 +45,19 @@ foreign key(CarId) References Cars(CarId),
 foreign key(CustomerId) References Customers(Id)
 )
 
+CREATE TABLE CarImages(
+Id int primary key identity(1,1),
+CarId int,
+ImagePath nvarchar(37),
+Date datetime,
+foreign key(CarId) References Cars(CarId),
+)
+
+alter table CarImages
+alter column Date datetime2;
+
+
+
 insert into Colors (ColorName) values ('Yellow');
 insert into Colors (ColorName) values ('Fuscia');
 insert into Colors (ColorName) values ('Blue');
@@ -147,10 +160,10 @@ insert into Users (FirstName, LastName, Email, Password) values ('Elaina', 'Dore
 
 insert into Customers (UserId, CompanyName) values (6, 'Eamia');
 insert into Customers (UserId, CompanyName) values (3, 'InnoZ');
-insert into Customers (UserId, CompanyName) values (11, 'Realbuzz');
-insert into Customers (UserId, CompanyName) values (15, 'Zava');
-insert into Customers (UserId, CompanyName) values (27, 'Realbridge');
-insert into Customers (UserId, CompanyName) values (18, 'Realmix');
+insert into Customers (UserId, CompanyName) values (1, 'Realbuzz');
+insert into Customers (UserId, CompanyName) values (5, 'Zava');
+insert into Customers (UserId, CompanyName) values (7, 'Realbridge');
+insert into Customers (UserId, CompanyName) values (8, 'Realmix');
 insert into Customers (UserId, CompanyName) values (49, 'Dazzlesphere');
 insert into Customers (UserId, CompanyName) values (46, 'Skidoo');
 insert into Customers (UserId, CompanyName) values (50, 'Edgewire');
@@ -167,15 +180,15 @@ insert into Customers (UserId, CompanyName) values (32, 'Devpulse');
 insert into Customers (UserId, CompanyName) values (23, 'Topiczoom');
 
 
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (29, 19, CONVERT(datetime,'07.01.2021',103), CONVERT(datetime,'13.01.2021',103));
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (17, 3, CONVERT(datetime,'02.02.2021',103), CONVERT(datetime,'08.02.2021',103));
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (27, 10, CONVERT(datetime,'19.01.2021',103), CONVERT(datetime,'05.02.2021',103));
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (12, 15, CONVERT(datetime,'04.01.2021',103), CONVERT(datetime,'11.01.2021',103));
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (20, 20, CONVERT(datetime,'27.11.2021',103), CONVERT(datetime,'06.12.2021',103));
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (26, 16, CONVERT(datetime,'13.01.2021',103), CONVERT(datetime,'16.01.2021',103));
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (18, 8, CONVERT(datetime,'18.01.2021',103), CONVERT(datetime,'06.02.2021',103));
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (2, 2, CONVERT(datetime,'11.12.2021',103), CONVERT(datetime,'16.12.2021',103));
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (23, 6, CONVERT(datetime,'10.02.2021',103), null);
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (9, 1, CONVERT(datetime,'07.01.2021',103), CONVERT(datetime,'13.01.2021',103));
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (7, 13, CONVERT(datetime,'02.02.2021',103), CONVERT(datetime,'08.02.2021',103));
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (2, 14, CONVERT(datetime,'19.01.2021',103), CONVERT(datetime,'05.02.2021',103));
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (8, 16, CONVERT(datetime,'04.01.2021',103), CONVERT(datetime,'11.01.2021',103));
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (5, 12, CONVERT(datetime,'27.11.2021',103), CONVERT(datetime,'06.12.2021',103));
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (10, 11, CONVERT(datetime,'13.01.2021',103), CONVERT(datetime,'16.01.2021',103));
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (9, 15, CONVERT(datetime,'14.01.2021',103), CONVERT(datetime,'16.01.2021',103));
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (1, 2, CONVERT(datetime,'11.12.2021',103), CONVERT(datetime,'16.12.2021',103));
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (6, 11, CONVERT(datetime,'10.02.2021',103), null);
 insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (30, 19, CONVERT(datetime,'14.01.2021',103), CONVERT(datetime,'15.01.2021',103));
 insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (21, 2, CONVERT(datetime,'16.01.2021',103), CONVERT(datetime,'19.01.2021',103));
 insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (20, 19, CONVERT(datetime,'27.01.2021',103), CONVERT(datetime,'03.02.2021',103));
@@ -192,3 +205,5 @@ insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (3, 11, CON
 insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (28, 12, CONVERT(datetime,'08.02.2021',103), null);
 insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (17, 13, CONVERT(datetime,'04.02.2021',103), null);
 insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (13, 18, CONVERT(datetime,'19.02.2021',103), null);
+
+drop table Users

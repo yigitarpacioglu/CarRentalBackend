@@ -10,6 +10,6 @@ namespace ReCapProject.Business.Constants
         public static string CarUpdated = "Car has been updated";
         public static string CarDeleted = "Car has been deleted";
         public static string CarAddError = "Car name must not be less than 2 letter or Daily Price value must be positive";
-        public static string CarsListed = "Car/Cars added";
+        public static string CarsListed = "Car/Cars listed";
     }
 }
