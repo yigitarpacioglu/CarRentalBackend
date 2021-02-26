@@ -2,16 +2,10 @@
 ### İkinci El Araç Satış Platformu
 
 ## Son Güncellemeler
-!! Users tablosu oluşturuldu. 
-!! Customers tablosu oluşturuldu 
-!! Rentals tablosu oluşturuldu ve Key atamaları yapıldı.
-!! Projede tablolardaki elemanlara karşılık gelecek Entity'ler oluşturuldu.
-!! Yeni DAL araçları için CRUD operasyonları yazıldı.
-!! Yeni kullanıcılar, müşteriler ve kira kayıtları oluşturuldu.
-!! Program.cs üzerinde yeni test operasyonları eklendi.
-!! Kiralama imkanı kod üzerinde gerçekleştirildi.
-!! Eğer araç ofis tarafından teslim alınmamışsa, yeni kiralama işlemi yapılması engellendi.
-
+Autofac desteği getirildi.
+Fluent Validation desteği getirildi.
+(A)spect (O)riented (P)rogramming temel seviye giriş gerçekleştirildi.
+Fluent Validation ile yeni kısıtlamalar getirildi.
 
 ## Core
 IEntity, IDto, IEntityRepository, EfEntityRepositoryBase yapıları bu katman içerisinde oluşturuldu.
@@ -24,11 +18,17 @@ ICrudServices: Gerçek Business katmanında farklı nesnelere ait servisler içi
 Car adında bir sınıf ile araç özelliklerini tutan nesne oluşturuldu.
 Özellik olarak : Id, BrandId, ColorId, ModelYear, DailyPrice, Description alanları eklendi.
 Brand ve Color nesneleri eklendi. Bu nesneler Id ve Name özelliklerini taşımaktadırlar.
+Users tablosu oluşturuldu.
+Customers tablosu oluşturuldu 
+Rentals tablosu oluşturuldu ve Key atamaları yapıldı.
+Projede bu tablolardaki elemanlara karşılık gelecek Entity'ler oluşturuldu.
+Yeni kullanıcılar, müşteriler ve kira kayıtları oluşturuldu. (SQL)
 
 ## DataAccess 
 Veritabanından ekleme, silme, listeleme gibi işlemleri içermektedir.
 Database için gerekli sorgular projeye eklenmiştir.
 Car, Brand ve Color nesneleri için Entity Framework altyapısını yazılmıştır.
+DAL operasyonlarında yeni eklenen Customers, Users ve Rentals için CRUD işlemleri yazıldı.
 
 ## Business 
 Data Access katmanı aracılığıyla 
@@ -41,3 +41,10 @@ Data Access katmanı aracılığıyla
 ## ConsoleUI
 Consolda bütün CRUD test işlemleri gerçekleştirilmektedir.
 Ayrıca GetCarDetails() ile farklı tablolarda bulunan CarName, BrandName, ColorName, DailyPrice bilgileri tabloların join edilmesi işlemi ile bir araya getirildi.
+Program.cs üzerinde yeni test operasyonları eklendi.
+Kiralama imkanı kod üzerinde gerçekleştirildi.
+Eğer araç ofis tarafından teslim alınmamışsa, yeni kiralama işlemi yapılması engellendi.
+
+# WebAPI 
+WebAPI bölümü oluşturuldu.
+Business katmanındaki bütün servisler için API karşılığı getirildi.
