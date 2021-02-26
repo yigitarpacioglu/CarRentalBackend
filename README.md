@@ -2,10 +2,14 @@
 ### İkinci El Araç Satış Platformu
 
 ## Son Güncellemeler
-Autofac desteği getirildi.
-Fluent Validation desteği getirildi.
-(A)spect (O)riented (P)rogramming temel seviye giriş gerçekleştirildi.
-Fluent Validation ile yeni kısıtlamalar getirildi.
+
+Database üzerinde CarImages tablosu ve ilgili sütunlar için (Id,CarId,ImagePath,Date) ilgili varlık oluşturuldu.
+API aracılığyla resim ekleme işlemi gerçekleştirildi.
+Eklenen resimler API içerisindeki wwwroot içerisinde tutuldu.
+Resim silme, güncelleme yetkileri eklendi.
+Bir araba için maksimum 5 resim ekleme kısıtı getirildi.
+Resmin eklendiği tarih, sistem tarafından otomatik olarak encapsulation yardımıyla entity seviyesinde atanacaktır. Keyfi değer verildiğinde ise sistem o değeri tarih olarak alacaktır.
+Bir arabaya ait resimleri listeleme imkanı oluşturuldu. Fakat listede araç olmadığında şirket logosu kullanıldı.
 
 ## Core
 IEntity, IDto, IEntityRepository, EfEntityRepositoryBase yapıları bu katman içerisinde oluşturuldu.
@@ -13,6 +17,9 @@ IDto: Özel sorgular ile çekilebilecek nesneler için oluşturulan arayüz.
 IEntityRepository: T generic yapısı ile kolayca implemente edilebilen, Gerçek DataAccess katmanındaki arayüzler için temel database işlemlerini tutmaktadır.,
 EfEntityRepositoryBase: Entity Framework yapısı için yine generic bir yapıda context ve yapısını oluşturacak olan nesnesi(entity) yardımıyla temel database işlemleri için somut bir arayüz implementasyonunu sağlayacak iskeleti tutmaktadır.
 ICrudServices: Gerçek Business katmanında farklı nesnelere ait servisler için benzer veri tabanı işlemlerinin uygulanabilirliğini kolaylaştırmak amacıyla generic yapıda oluşturulmuştur.
+Autofac desteği getirildi.
+Fluent Validation desteği getirildi.
+(A)spect (O)riented (P)rogramming temel seviye giriş gerçekleştirildi.
 
 ## Entities 
 Car adında bir sınıf ile araç özelliklerini tutan nesne oluşturuldu.
@@ -37,6 +44,7 @@ Data Access katmanı aracılığıyla
 - AddService(T entity)     : Dışarıdan verilen bir nesnenin sisteme eklenmesi,
 - UpdateService(T entity)  : Dışarıdan verilen bir nesnenin sistemdeki eşleşen ilanın güncellenmesi, 
 - DeleteService(T entity)  : Yine dışarıdan verilen bir nesne ile eşleşen ilanın silinmesi fonksiyonları gerçekleştirilmiştir.
+ Fluent Validation ile yeni kısıtlamalar getirildi.
 
 ## ConsoleUI
 Consolda bütün CRUD test işlemleri gerçekleştirilmektedir.
