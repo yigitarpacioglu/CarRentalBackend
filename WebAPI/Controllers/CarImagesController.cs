@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         public IActionResult Add([FromForm]CarImage carImage, [FromForm] IFormFile image)
         {
                 string key = Guid.NewGuid().ToString();
-                string extension = Path.GetExtension(image.FileName);
+                string extension = Path.GetExtension(image.FileName).ToLower();
                 if (extension != ".jpeg" && extension != ".png")
                 {
                     return BadRequest(CarImageMessages.MissmatchingFileExtension);
@@ -42,6 +42,7 @@ namespace WebAPI.Controllers
                 string basePath = _webHostEnvironment.WebRootPath + @"\\Assets\\";
                 carImage.ImagePath = basePath + uniqueName;
                 var result = _carImageService.AddService(carImage);
+                
 
                 if (result.Success)
                 {

@@ -23,15 +23,16 @@ BrandName nvarchar(10)
 
 CREATE TABLE Users(
 Id int primary key identity(1,1),
-FirstName nvarchar(20),
-LastName nvarchar(20),
-Email nvarchar(40),
-Password nvarchar(30)
+FirstName varchar(50), 
+Email varchar(50),
+PasswordSalt varbinary(500),
+PasswordHash varbinary(500),
+Status bit
 )
 CREATE TABLE Customers(
 Id int primary key identity(1,1),
 UserId int,
-CompanyName nvarchar(30),
+CompanyName varchar(50),
 foreign key(UserId) References Users(Id),
 )
 
@@ -45,6 +46,7 @@ foreign key(CarId) References Cars(CarId),
 foreign key(CustomerId) References Customers(Id)
 )
 
+
 CREATE TABLE CarImages(
 Id int primary key identity(1,1),
 CarId int,
@@ -55,6 +57,9 @@ foreign key(CarId) References Cars(CarId),
 
 alter table CarImages
 alter column Date datetime2;
+truncate table Users
+
+
 
 
 

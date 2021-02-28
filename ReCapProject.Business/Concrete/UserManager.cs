@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using ReCapProject.Business.Abstract;
 using ReCapProject.Business.Constants;
+using ReCapProject.Core.Entites.Concrete;
 using ReCapProject.Core.Utilities.Results;
 using ReCapProject.DataAccess.Abstract;
 using ReCapProject.Entities.Concrete;
@@ -53,6 +54,16 @@ namespace ReCapProject.Business.Concrete
         {
             _userDal.Delete(entity);
             return new SuccessResult(UserMessages.UserDeleted);
+        }
+
+        public List<OperationClaim> GetClaims(User user)
+        {
+            return _userDal.GetClaims(user);
+        }
+
+        public User GetByMail(string email)
+        {
+            return _userDal.Get(u => u.Email == email);
         }
     }
 }

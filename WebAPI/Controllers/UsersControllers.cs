@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ReCapProject.Business.Abstract;
-using ReCapProject.Entities.Concrete;
+using ReCapProject.Core.Entites.Concrete;
 
 namespace WebAPI.Controllers
 {

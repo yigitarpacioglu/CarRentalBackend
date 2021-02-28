@@ -6,6 +6,7 @@ using System.Net.Mime;
 using System.Reflection;
 using Microsoft.Extensions.Logging;
 using ReCapProject.Business.Concrete;
+using ReCapProject.Core.Entites.Concrete;
 using ReCapProject.Core.Utilities.Results;
 using ReCapProject.DataAccess.Concrete.EntityFramework;
 using ReCapProject.DataAccess.Concrete.InMemory;
@@ -334,7 +335,6 @@ namespace ReCapProject.ConsoleUI
             Console.WriteLine("\n------------------- GetByIdService() Test-------------------\n");
             if (result.Success == true)
             {
-                Console.WriteLine(result.Data.Id + " - " + result.Data.FirstName + " " + result.Data.FirstName + "\ne-mail: " + result.Data.Email + "\nşifre: " + result.Data.Password);
                 Console.WriteLine("\n");
             }
             else
@@ -353,7 +353,6 @@ namespace ReCapProject.ConsoleUI
                 Console.WriteLine(result.Message);
                 foreach (var user in result.Data)
                 {
-                    Console.WriteLine(user.Id + " - " + user.FirstName + " " +user.LastName+"\ne-mail: "+user.Email+"\nşifre: "+user.Password );
                     Console.WriteLine("\n");
                 }
             }
@@ -373,7 +372,6 @@ namespace ReCapProject.ConsoleUI
                 FirstName = "Yiğit",
                 LastName = "Arpacı",
                 Email = "yigit.arpacioglu@gmail.com",
-                Password = "123456"
             });
             Console.WriteLine(result.Message);
         }
@@ -387,7 +385,6 @@ namespace ReCapProject.ConsoleUI
                 FirstName = "Yiğit",
                 LastName = "Arpacı",
                 Email = "yigit.arpacioglu@gmail.com",
-                Password = "123456"
             });
             Console.WriteLine(result.Message);
         }
@@ -401,7 +398,6 @@ namespace ReCapProject.ConsoleUI
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 Email = user.Email,
-                Password = user.Password
             });
             Console.WriteLine(result.Message);
         }

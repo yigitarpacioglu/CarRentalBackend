@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using ReCapProject.Business.Abstract;
 using ReCapProject.Business.Concrete;
 using ReCapProject.Business.Constants;
@@ -25,6 +26,7 @@ namespace WebAPI.Controllers
             _carService = carService;
         }
 
+        [Authorize()]
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
