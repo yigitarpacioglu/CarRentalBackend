@@ -4,10 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Business.BusinessAspects.Autofac;
 using FluentValidation;
 using ReCapProject.Business.Abstract;
 using ReCapProject.Business.Constants;
 using ReCapProject.Business.ValidationRules.FluentValidation;
+using ReCapProject.Core.Aspects.Autofac.Caching;
 using ReCapProject.Core.Aspects.Autofac.Validation;
 using ReCapProject.Core.CrossCuttingConcerns.Validation;
 using ReCapProject.Core.Utilities.Results;
@@ -25,6 +27,9 @@ namespace ReCapProject.Business.Concrete
         {
             _carDal = carDal;
         }
+        
+        
+        [CacheAspect]
         public IDataResult<List<Car>> GetAllService()
         {
             
@@ -35,6 +40,7 @@ namespace ReCapProject.Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), CarMessages.CarsListed);
         }
 
+        [CacheAspect]
         public IDataResult<Car> GetById(int id)
         {
             if (DateTime.Now.Hour == hour)
@@ -45,7 +51,9 @@ namespace ReCapProject.Business.Concrete
 
         }
 
+        [SecuredOperation("car.add")]
         [ValidationAspect(typeof(CarValidator))]
+        //[CacheRemoveAspect("ICarService.Get")]
         public IResult AddService(Car entity)
         {
             ValidationTool.Validate(new CarValidator(), entity);

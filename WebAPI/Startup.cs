@@ -10,11 +10,14 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Core.Extensions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;
 using Microsoft.IdentityModel.Tokens;
 using ReCapProject.Business.Abstract;
 using ReCapProject.Business.Concrete;
+using ReCapProject.Core.DependencyResolvers;
+using ReCapProject.Core.Utilities.IoC;
 using ReCapProject.Core.Utilities.Security.Encryption;
 using ReCapProject.Core.Utilities.Security.Jwt;
 using ReCapProject.DataAccess.Abstract;
@@ -49,11 +52,7 @@ namespace WebAPI
             //services.AddSingleton<ICustomerDal, EfCustomerDal>();
             //services.AddSingleton<IRentalDal, EfRentalDal>();
             //services.AddSingleton<IUserDal, EfUserDal>();
-            services.AddCors(options =>
-            {
-                options.AddPolicy("AllowOrigin",
-                    builder => builder.WithOrigins("http://localhost:3000"));
-            });
+            
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
@@ -70,6 +69,10 @@ namespace WebAPI
 
                 };
             });
+            services.AddDependencyResolvers(new ICoreModule[]
+            {
+                new CoreModule()
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -79,12 +82,7 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
-
-            app.UseCors(builder => builder.WithOrigins("http://localhost:3000").AllowAnyHeader());
+            
 
             app.UseHttpsRedirection();
 

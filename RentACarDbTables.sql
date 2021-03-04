@@ -2,7 +2,6 @@
 CarId int primary key identity(1,1),
 BrandId int,
 ColorId int,
-CarName nvarchar(20),
 ModelYear int,
 DailyPrice decimal,
 Descriptions nvarchar(50),

@@ -1,6 +1,7 @@
 ﻿using ReCapProject.Core.Entites.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace ReCapProject.Business.Constants
@@ -14,5 +15,6 @@ namespace ReCapProject.Business.Constants
         public static string UserAlreadyExists="User is already registered in the system";
         public static string UserRegistered ="User registered successfully";
         public static string AccessTokenCreated="Access token has been created successfully";
+        internal static string AuthorizationDenied="There is not such access identified for user";
     }
 }
