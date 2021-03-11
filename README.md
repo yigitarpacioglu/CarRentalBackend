@@ -3,7 +3,8 @@
 
 ## Son Güncellemeler
 
-!!! JWT ENTEGRASYONU yapıldı.
+Cache, Transaction ve Performance entegrasyonu yapıldı.
+!!! Json Web Token ENTEGRASYONU yapıldı.
 
 ## Core
 IEntity, IDto, IEntityRepository, EfEntityRepositoryBase yapıları bu katman içerisinde oluşturuldu.
