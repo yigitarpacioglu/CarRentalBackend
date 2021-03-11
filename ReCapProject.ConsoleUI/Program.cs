@@ -353,7 +353,8 @@ namespace ReCapProject.ConsoleUI
                 Console.WriteLine(result.Message);
                 foreach (var user in result.Data)
                 {
-                    Console.WriteLine("\n");
+                    Console.WriteLine(user.FirstName+" "+user.LastName+"\n"+
+                                      user.Email+" "+user.Status);
                 }
             }
             else

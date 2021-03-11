@@ -10,6 +10,7 @@ foreign key(BrandId) References Brands(BrandId)
 )
 
 
+
 CREATE TABLE Colors(
 ColorId int primary key identity(1,1),
 ColorName nvarchar(10)
@@ -54,8 +55,8 @@ Date datetime,
 foreign key(CarId) References Cars(CarId),
 )
 
-alter table CarImages
-alter column Date datetime2;
+alter table Cars
+drop column CarName;
 truncate table Users
 
 

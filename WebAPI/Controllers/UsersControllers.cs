@@ -13,11 +13,11 @@ namespace WebAPI.Controllers
     [ApiController]
 
 
-    public class UsersControllers : ControllerBase
+    public class UsersController : ControllerBase
     {
         private IUserService _userService;
 
-        public UsersControllers(IUserService userService)
+        public UsersController(IUserService userService)
         {
             _userService = userService;
         }

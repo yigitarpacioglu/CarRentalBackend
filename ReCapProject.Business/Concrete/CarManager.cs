@@ -51,8 +51,8 @@ namespace ReCapProject.Business.Concrete
 
         }
 
-        [SecuredOperation("car.add")]
-        [ValidationAspect(typeof(CarValidator))]
+        //[SecuredOperation("car.add")]
+        //[ValidationAspect(typeof(CarValidator))]
         //[CacheRemoveAspect("ICarService.Get")]
         public IResult AddService(Car entity)
         {

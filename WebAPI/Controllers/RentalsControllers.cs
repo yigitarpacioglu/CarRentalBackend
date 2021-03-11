@@ -11,19 +11,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersControllers : ControllerBase
+    public class RentalsController : ControllerBase
     {
-        private ICustomerService _customerService;
-
-        public CustomersControllers(ICustomerService customerService)
+        private IRentalService _rentalService;
+        public RentalsController(IRentalService rentalService)
         {
-            _customerService = customerService;
+            _rentalService = rentalService;
+            
         }
 
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
-            var result = _customerService.GetAllService();
+            var result = _rentalService.GetAllService();
             if (result.Success)
             {
                 return Ok(result);
@@ -32,9 +32,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("Add")]
-        public IActionResult Add(Customer customer)
+        public IActionResult Add(Rental rental)
         {
-            var result = _customerService.AddService(customer);
+            var result = _rentalService.AddService(rental);
             if (result.Success)
             {
                 return Ok(result);
@@ -42,9 +42,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Update")]
-        public IActionResult Update(Customer customer)
+        public IActionResult Update(Rental rental)
         {
-            var result = _customerService.UpdateService(customer);
+            var result = _rentalService.UpdateService(rental);
             if (result.Success)
             {
                 return Ok(result);
@@ -52,9 +52,9 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("Delete")]
-        public IActionResult Delete(Customer customer)
+        public IActionResult Delete(Rental rental)
         {
-            var result = _customerService.DeleteService(customer);
+            var result = _rentalService.DeleteService(rental);
             if (result.Success)
             {
                 return Ok(result);
@@ -64,7 +64,7 @@ namespace WebAPI.Controllers
         [HttpGet("GetById")]
         public IActionResult Get(int id)
         {
-            var result = _customerService.GetById(id);
+            var result = _rentalService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
