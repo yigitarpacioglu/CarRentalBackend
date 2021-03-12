@@ -17,16 +17,16 @@ namespace ReCapProject.DataAccess.Concrete.EntityFramework
             {
                 var result = from r in context.Rentals
                     join c in context.Cars on r.CarId equals c.CarId
-                    join m in context.Customers on r.CustomerId equals m.UserId
+                    join m in context.Customers on r.CustomerId equals m.Id
                     join u in context.Users on m.UserId equals u.Id
                     join b in context.Brands on c.BrandId equals b.BrandId
                     select new RentDetailDto()
                     {
-                        Car = b.BrandName + " " + c.Descriptions,
+                        Car = b.BrandName+" "+c.Descriptions,
+                        Customer = u.FirstName+" "+u.LastName,
                         DailyPrice = c.DailyPrice,
-                        ReturnDate = r.ReturnDate,
                         RentDate = r.RentDate,
-                        CustomerName = u.FirstName + " " + u.LastName
+                        ReturnDate = r.ReturnDate
                     };
                 return result.ToList();
             }

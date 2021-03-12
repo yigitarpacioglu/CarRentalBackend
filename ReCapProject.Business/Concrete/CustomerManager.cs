@@ -6,6 +6,7 @@ using ReCapProject.Business.Constants;
 using ReCapProject.Core.Utilities.Results;
 using ReCapProject.DataAccess.Abstract;
 using ReCapProject.Entities.Concrete;
+using ReCapProject.Entities.DTOs;
 
 namespace ReCapProject.Business.Concrete
 {
@@ -34,7 +35,7 @@ namespace ReCapProject.Business.Concrete
             {
                 return new ErrorDataResult<Customer>(GeneralMessages.Maintenance);
             }
-            return new SuccessDataResult<Customer>(_customerDal.Get(c=>c.Id==id), CustomerMessages.CustomersListed); ;
+            return new SuccessDataResult<Customer>(_customerDal.Get(c=>c.Id==id), CustomerMessages.CustomersListed); 
         }
 
         public IResult AddService(Customer entity)
@@ -53,6 +54,15 @@ namespace ReCapProject.Business.Concrete
         {
             _customerDal.Delete(entity);
             return new SuccessResult(CustomerMessages.CustomerDeleted);
+        }
+
+        public IDataResult<List<CustomerDetailDto>> GetCustomerDetailService()
+        {
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<List<CustomerDetailDto>>(GeneralMessages.Maintenance);
+            }
+            return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails(), CustomerMessages.CustomersListed);
         }
     }
 }

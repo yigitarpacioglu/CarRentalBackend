@@ -7,7 +7,7 @@ namespace ReCapProject.Entities.DTOs
 {
     public class RentDetailDto:IDto
     {
-        public string CustomerName { get; set; }
+        public string Customer { get; set; }
         public string Car { get; set; }
         public decimal DailyPrice  { get; set; }
         public DateTime RentDate { get; set; }
