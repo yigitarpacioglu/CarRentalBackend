@@ -186,9 +186,9 @@ insert into Customers (UserId, CompanyName) values (23, 'Topiczoom');
 
 
 insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (9, 1, CONVERT(datetime,'07.01.2021',103), CONVERT(datetime,'13.01.2021',103));
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (7, 13, CONVERT(datetime,'02.02.2021',103), CONVERT(datetime,'08.02.2021',103));
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (2, 14, CONVERT(datetime,'19.01.2021',103), CONVERT(datetime,'05.02.2021',103));
-insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (8, 16, CONVERT(datetime,'04.01.2021',103), CONVERT(datetime,'11.01.2021',103));
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (7, 2, CONVERT(datetime,'02.02.2021',103), CONVERT(datetime,'08.02.2021',103));
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (2, 1, CONVERT(datetime,'19.01.2021',103), CONVERT(datetime,'05.02.2021',103));
+insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (8, 3, CONVERT(datetime,'04.01.2021',103), CONVERT(datetime,'11.01.2021',103));
 insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (5, 12, CONVERT(datetime,'27.11.2021',103), CONVERT(datetime,'06.12.2021',103));
 insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (10, 11, CONVERT(datetime,'13.01.2021',103), CONVERT(datetime,'16.01.2021',103));
 insert into Rentals (CarId, CustomerId, RentDate, ReturnDate) values (9, 15, CONVERT(datetime,'14.01.2021',103), CONVERT(datetime,'16.01.2021',103));

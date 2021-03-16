@@ -90,5 +90,22 @@ namespace ReCapProject.Business.Concrete
             }
             return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailsById(c => c.CarId == id), CarMessages.CarsListed);
         }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByColorName(string colorName)
+        {
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>(GeneralMessages.Maintenance);
+            }
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c=>c.ColorName==colorName), CarMessages.CarsListed);
+        }
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandName(string brandName)
+        {
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<List<CarDetailDto>>(GeneralMessages.Maintenance);
+            }
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandName == brandName), CarMessages.CarsListed);
+        }
     }
 }

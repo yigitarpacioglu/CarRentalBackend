@@ -12,5 +12,8 @@ namespace ReCapProject.Business.Abstract
     {
         IDataResult<List<CarDetailDto>> GetCarDetailsService();
         IDataResult<CarDetailDto> GetCarDetailsByIdService(int id);
+        IDataResult<List<CarDetailDto>> GetCarDetailsByColorName(string colorName);
+        IDataResult<List<CarDetailDto>> GetCarDetailsByBrandName(string brandName);
+        
     }
 }

@@ -29,7 +29,9 @@ namespace ReCapProject.DataAccess.Concrete.EntityFramework
                         ColorName = r.ColorName,
                         Description = c.Descriptions
                     };
-                return result.ToList();
+                return filter == null
+                    ? result.ToList()
+                    : result.Where(filter).ToList();
             }
         }
         public CarDetailDto GetCarDetailsById(Expression<Func<CarDetailDto, bool>> filter)
