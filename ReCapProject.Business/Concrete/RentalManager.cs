@@ -13,7 +13,7 @@ namespace ReCapProject.Business.Concrete
     public class RentalManager:IRentalService
     {
         private IRentalDal _rentalDal;
-        private int hour=03;
+        private int hour= Values.hour;
 
         public RentalManager(IRentalDal rentalDal)
         {

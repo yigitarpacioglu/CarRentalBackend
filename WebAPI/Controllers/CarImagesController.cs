@@ -28,41 +28,18 @@ namespace WebAPI.Controllers
             _webHostEnvironment = webHostEnvironment;
         }
 
-       
-        [HttpPost("Add")]
-        public IActionResult Add([FromForm]CarImage carImage, [FromForm] IFormFile image)
+
+        [HttpPost("add")]
+        public IActionResult AddAsync([FromForm(Name = ("Image"))] IFormFile file, [FromForm] CarImage carImage)
         {
-                string key = Guid.NewGuid().ToString();
-                string extension = Path.GetExtension(image.FileName).ToLower();
-                if (extension != ".jpeg" && extension != ".png")
-                {
-                    return BadRequest(CarImageMessages.MissmatchingFileExtension);
-                }
-                string uniqueName = key + extension;
-                string basePath = _webHostEnvironment.WebRootPath + @"\\Assets\\";
-                carImage.ImagePath = basePath + uniqueName;
-                var result = _carImageService.AddService(carImage);
-                
+            var result = _carImageService.Add(carImage, file);
 
-                if (result.Success)
-                {
-                    if (!Directory.Exists(basePath))
-                    {
-                        Directory.CreateDirectory(basePath);
-                    }
+            if (result.Success)
+            {
+                return Ok(result);
+            }
 
-                    using (FileStream fileStream = System.IO.File.Create(carImage.ImagePath))
-                    {
-                        image.CopyTo(fileStream);
-                        fileStream.Flush();
-                    }
-                    return Ok(result);
-                }
-                else
-                {
-                    return BadRequest(result);
-                }
-
+            return BadRequest(result);
         }
 
         [HttpGet("GetAll")]

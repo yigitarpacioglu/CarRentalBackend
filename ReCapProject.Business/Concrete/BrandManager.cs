@@ -13,7 +13,7 @@ namespace ReCapProject.Business.Concrete
     public class BrandManager:IBrandService
     {
         private IBrandDal _brandDal;
-        private int hour = 03;
+        private int hour = Values.hour;
         public BrandManager(IBrandDal brandDal)
         {
             _brandDal = brandDal;

@@ -13,7 +13,7 @@ namespace ReCapProject.Business.Concrete
     public class CustomerManager:ICustomerService
     {
         private ICustomerDal _customerDal;
-        private int hour=03;
+        private int hour= Values.hour;
 
         public CustomerManager(ICustomerDal customerDal)
         {

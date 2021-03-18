@@ -13,7 +13,7 @@ namespace ReCapProject.Business.Concrete
     public class UserManager:IUserService
     {
         private IUserDal _userDal;
-        private int hour=03;
+        private int hour=Values.hour;
 
         public UserManager(IUserDal userDal)
         {

@@ -12,7 +12,7 @@ namespace ReCapProject.Business.Concrete
     public class ColorManager:IColorService
     {
         private IColorDal _colorDal;
-        private int hour=04;
+        private int hour= Values.hour;
 
         public ColorManager(IColorDal colorDal)
         {

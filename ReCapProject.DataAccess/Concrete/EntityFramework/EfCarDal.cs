@@ -21,13 +21,15 @@ namespace ReCapProject.DataAccess.Concrete.EntityFramework
                 var result = from c in context.Cars
                     join b in context.Brands on c.BrandId equals b.BrandId
                     join r in context.Colors on c.ColorId equals r.ColorId
+                    join i in context.CarImages on c.CarId equals  i.CarId
                     select new CarDetailDto()
                     {
                         CarId = c.CarId,
                         BrandName = b.BrandName,
                         DailyPrice = c.DailyPrice,
                         ColorName = r.ColorName,
-                        Description = c.Descriptions
+                        Description = c.Descriptions,
+                        ImagePath = i.ImagePath
                     };
                 return filter == null
                     ? result.ToList()

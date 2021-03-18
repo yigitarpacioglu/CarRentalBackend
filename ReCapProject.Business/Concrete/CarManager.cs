@@ -21,7 +21,7 @@ namespace ReCapProject.Business.Concrete
 {
     public class CarManager : ICarService
     {
-        private int hour = 03;
+        private int hour = Values.hour;
         private ICarDal _carDal;
         public CarManager(ICarDal carDal)
         {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Core.Utilities.FileHelper;
+using Microsoft.AspNetCore.Http;
 using ReCapProject.Business.Abstract;
 using ReCapProject.Business.Constants;
 using ReCapProject.Core.Utilities.Business;
@@ -77,6 +79,22 @@ namespace ReCapProject.Business.Concrete
             return new SuccessDataResult<List<CarImage>>(new List<CarImage>
                 {new CarImage {CarId = carId, ImagePath = defaultPath}});
             
+        }
+
+        public IResult Add(CarImage carImage, IFormFile file)
+        {
+            IResult result = BusinessRules.Run(
+                CheckIfTotalImageForCarExceed(carImage.CarId)
+            );
+
+            if (result != null)
+            {
+                return result;
+            }
+
+            carImage.ImagePath = FileHelper.AddAsync(file);
+            _carImageDal.Add(carImage);
+            return new SuccessResult();
         }
 
         private IResult CheckIfTotalImageForCarExceed(int carId)
