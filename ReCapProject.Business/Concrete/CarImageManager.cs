@@ -69,8 +69,7 @@ namespace ReCapProject.Business.Concrete
 
         public IDataResult<List<CarImage>> GetAllByCarId(int carId)
         {
-            string defaultPath = Directory.GetParent(System.IO.Directory.GetCurrentDirectory()).FullName +
-                                 "\\Assets\\default.png";
+            string defaultPath = "../../assets/default.png";
             var query = _carImageDal.GetAll(c => c.CarId == carId);
             if (query.Count!=0)
             {
@@ -91,7 +90,6 @@ namespace ReCapProject.Business.Concrete
             {
                 return result;
             }
-
             carImage.ImagePath = FileHelper.AddAsync(file);
             _carImageDal.Add(carImage);
             return new SuccessResult();

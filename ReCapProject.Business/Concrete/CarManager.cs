@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using Business.BusinessAspects.Autofac;
+using Castle.Core.Internal;
 using FluentValidation;
 using ReCapProject.Business.Abstract;
 using ReCapProject.Business.Constants;
@@ -79,17 +80,28 @@ namespace ReCapProject.Business.Concrete
             {
                 return new ErrorDataResult<List<CarDetailDto>>(GeneralMessages.Maintenance);
             }
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), CarMessages.CarsListed);
+            string defaultPath = "\\Assets\\default.jpg";
+            var query = _carDal.GetCarDetails();
+            query.ForEach(delegate (CarDetailDto car)
+            {
+                if (car.ImagePath.IsNullOrEmpty())
+                {
+                    car.ImagePath = defaultPath;
+                }
+            });
+            return new SuccessDataResult<List<CarDetailDto>>(query,CarMessages.CarsListed);
         }
 
-        public IDataResult<CarDetailDto> GetCarDetailsByIdService(int id)
+        public IDataResult<List<CarDetailDto>> GetCarDetailsById(int id)
         {
             if (DateTime.Now.Hour == hour)
             {
-                return new ErrorDataResult<CarDetailDto>(GeneralMessages.Maintenance);
+                return new ErrorDataResult<List<CarDetailDto>>(GeneralMessages.Maintenance);
             }
-            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailsById(c => c.CarId == id), CarMessages.CarsListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(p => p.CarId == id), CarMessages.CarsListed);
+
         }
+
 
         public IDataResult<List<CarDetailDto>> GetCarDetailsByColorName(string colorName)
         {

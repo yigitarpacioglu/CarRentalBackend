@@ -5,6 +5,7 @@ using System.Linq.Expressions;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using ReCapProject.Core.DataAccess.EntityFramework;
 using ReCapProject.DataAccess.Abstract;
 using ReCapProject.Entities.Concrete;
@@ -21,7 +22,7 @@ namespace ReCapProject.DataAccess.Concrete.EntityFramework
                 var result = from c in context.Cars
                     join b in context.Brands on c.BrandId equals b.BrandId
                     join r in context.Colors on c.ColorId equals r.ColorId
-                    join i in context.CarImages on c.CarId equals  i.CarId
+                    let i = context.CarImages.Where(x => x.CarId == c.CarId).FirstOrDefault()
                     select new CarDetailDto()
                     {
                         CarId = c.CarId,
@@ -43,13 +44,15 @@ namespace ReCapProject.DataAccess.Concrete.EntityFramework
                 var result = from c in context.Cars
                     join b in context.Brands on c.BrandId equals b.BrandId
                     join r in context.Colors on c.ColorId equals r.ColorId
-                    select new CarDetailDto()
+                    let i = context.CarImages.Where(x => x.CarId == c.CarId).FirstOrDefault()
+                             select new CarDetailDto()
                     {
                         CarId = c.CarId,
                         BrandName = b.BrandName,
                         DailyPrice = c.DailyPrice,
                         ColorName = r.ColorName,
-                        Description = c.Descriptions
+                        Description = c.Descriptions,
+                        ImagePath = i.ImagePath
                     };
                 return result.SingleOrDefault(filter);
             }
