@@ -15,11 +15,11 @@ namespace ReCapProject.DataAccess.Concrete.EntityFramework
 {
     public class EfCarDal: EfEntityRepositoryBase<Car,CarRentalDbContext>,ICarDal
     {
-        public List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto, bool>> filter = null)
+        public List<CarDetailDto> GetCarDetails(Expression<Func<Car, bool>> filter = null)
         {
             using (CarRentalDbContext context = new CarRentalDbContext())
             {
-                var result = from c in context.Cars
+                var result = from c in filter == null ? context.Cars:context.Cars.Where(filter)
                     join b in context.Brands on c.BrandId equals b.BrandId
                     join r in context.Colors on c.ColorId equals r.ColorId
                     let i = context.CarImages.Where(x => x.CarId == c.CarId).FirstOrDefault()
@@ -32,9 +32,7 @@ namespace ReCapProject.DataAccess.Concrete.EntityFramework
                         Description = c.Descriptions,
                         ImagePath = i.ImagePath
                     };
-                return filter == null
-                    ? result.ToList()
-                    : result.Where(filter).ToList();
+                return result.ToList();
             }
         }
         public CarDetailDto GetCarDetailsById(Expression<Func<CarDetailDto, bool>> filter)

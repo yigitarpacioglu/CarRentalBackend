@@ -52,7 +52,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPost("Update")]
+        [HttpPost("UpdateBalance")]
         public IActionResult Update(Customer customer)
         {
             var result = _customerService.UpdateService(customer);
@@ -76,6 +76,16 @@ namespace WebAPI.Controllers
         public IActionResult Get(int id)
         {
             var result = _customerService.GetById(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost("UpdateBalance")]
+        public IActionResult UpdateBalance(Customer customer,decimal cashAmount)
+        {
+            var result = _customerService.UpdateBalance(customer,cashAmount);
             if (result.Success)
             {
                 return Ok(result);

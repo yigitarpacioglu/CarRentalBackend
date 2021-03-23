@@ -11,9 +11,12 @@ namespace ReCapProject.Business.Abstract
     public interface ICarService:ICrudServices<Car>
     {
         IDataResult<List<CarDetailDto>> GetCarDetailsService();
-        IDataResult<List<CarDetailDto>> GetCarDetailsById(int id);
-        IDataResult<List<CarDetailDto>> GetCarDetailsByColorName(string colorName);
-        IDataResult<List<CarDetailDto>> GetCarDetailsByBrandName(string brandName);
-        
+        IDataResult<CarDetailDto> GetCarDetailsById(int id);
+        IDataResult<List<CarDetailDto>> GetCarDetailsByColorId(int colorId);
+        IDataResult<List<CarDetailDto>> GetCarDetailsByBrandId(int brandId);
+        IDataResult<List<CarDetailDto>> GetCarDetailsByBrandAndColorId(int brandId, int colorId);
+
+
+
     }
 }

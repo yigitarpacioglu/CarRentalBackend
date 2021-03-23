@@ -55,8 +55,9 @@ Date datetime,
 foreign key(CarId) References Cars(CarId),
 )
 
-alter table Cars
-drop column CarName;
+alter table Customers
+add Balance decimal;
+
 truncate table Users
 
 

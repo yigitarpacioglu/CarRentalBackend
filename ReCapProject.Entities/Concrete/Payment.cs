@@ -5,11 +5,11 @@ using ReCapProject.Core.Entities;
 
 namespace ReCapProject.Entities.Concrete
 {
-    public class Customer:IEntity
+    public class Payment:IEntity
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
-        public string CompanyName { get; set; }
-        public decimal Balance { get; set; }
+        public int CustomerId { get; set; }
+        public int RentalId { get; set; }
+        public decimal Amount { get; set; }
     }
 }

@@ -92,32 +92,41 @@ namespace ReCapProject.Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(query,CarMessages.CarsListed);
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarDetailsById(int id)
+        public IDataResult<CarDetailDto> GetCarDetailsById(int id)
+        {
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<CarDetailDto>(GeneralMessages.Maintenance);
+            }
+            return new SuccessDataResult<CarDetailDto>(_carDal.GetCarDetailsById(p => p.CarId == id), CarMessages.CarsListed);
+
+        }
+
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByColorId(int colorId)
         {
             if (DateTime.Now.Hour == hour)
             {
                 return new ErrorDataResult<List<CarDetailDto>>(GeneralMessages.Maintenance);
             }
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(p => p.CarId == id), CarMessages.CarsListed);
-
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c=>c.ColorId==colorId), CarMessages.CarsListed);
         }
-
-
-        public IDataResult<List<CarDetailDto>> GetCarDetailsByColorName(string colorName)
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandId(int brandId)
         {
             if (DateTime.Now.Hour == hour)
             {
                 return new ErrorDataResult<List<CarDetailDto>>(GeneralMessages.Maintenance);
             }
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c=>c.ColorName==colorName), CarMessages.CarsListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == brandId), CarMessages.CarsListed);
         }
-        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandName(string brandName)
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandAndColorId(int brandId, int colorId)
         {
             if (DateTime.Now.Hour == hour)
             {
                 return new ErrorDataResult<List<CarDetailDto>>(GeneralMessages.Maintenance);
             }
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandName == brandName), CarMessages.CarsListed);
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == brandId && c.ColorId == colorId), CarMessages.CarsListed);
         }
+
     }
 }

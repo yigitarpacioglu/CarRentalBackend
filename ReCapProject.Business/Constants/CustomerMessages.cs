@@ -10,5 +10,9 @@ namespace ReCapProject.Business.Constants
         public static string CustomerUpdated = "Customer has been updated";
         public static string CustomerDeleted = "Customer has been deleted";
         public static string CustomersListed = "Customers/Customer listed";
+
+        public static string AmountUnderMinLimit =
+            "Amount of balance you would like to placed is under limit. Please place higher balance.";
+        public static string SuccessfulBalanceUpdate = " Cash has been transferred to the account successfully";
     }
 }

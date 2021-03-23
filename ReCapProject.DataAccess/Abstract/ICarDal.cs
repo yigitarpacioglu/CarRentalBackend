@@ -10,7 +10,7 @@ namespace ReCapProject.DataAccess.Abstract
 {
     public interface ICarDal:IEntityRepository<Car>
     {
-        List<CarDetailDto> GetCarDetails(Expression<Func<CarDetailDto, bool>> filter = null);
+        List<CarDetailDto> GetCarDetails(Expression<Func<Car, bool>> filter = null);
         CarDetailDto GetCarDetailsById(Expression<Func<CarDetailDto, bool>> filter); 
         // List<CarDetailDto> GetCarDetailsByColorName(Expression<Func<CarDetailDto, bool>> filter);
     }

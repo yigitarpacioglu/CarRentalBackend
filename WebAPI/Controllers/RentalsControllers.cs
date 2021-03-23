@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ReCapProject.Business.Abstract;
 using ReCapProject.Entities.Concrete;
+using ReCapProject.Entities.DTOs;
 
 namespace WebAPI.Controllers
 {
@@ -14,10 +15,11 @@ namespace WebAPI.Controllers
     public class RentalsController : ControllerBase
     {
         private IRentalService _rentalService;
-        public RentalsController(IRentalService rentalService)
+        private IPaymentService _paymentService;
+        public RentalsController(IRentalService rentalService, IPaymentService paymentService)
         {
             _rentalService = rentalService;
-            
+            _paymentService = paymentService;
         }
 
         [HttpGet("GetAll")]
@@ -80,6 +82,23 @@ namespace WebAPI.Controllers
                 return Ok(result);
             }
             return BadRequest(result);
+        }
+
+        [HttpPost("Payment")]
+        public IActionResult CashTransaction(RentOrderDto rentOrder)
+        {
+            var moneyTransaction = _paymentService.CashTransaction(rentOrder);
+            if (!moneyTransaction.Success)
+            {
+                return BadRequest(moneyTransaction.Message);
+            }
+            var rentResult = _rentalService.AddService(rentOrder.Rental);
+            if (!rentResult.Success)
+            {
+                return BadRequest(rentResult);
+            }
+
+            return Ok(rentResult);
         }
     }
 }

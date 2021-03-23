@@ -8,9 +8,8 @@ using ReCapProject.Entities.DTOs;
 
 namespace ReCapProject.Business.Abstract
 {
-    public interface ICustomerService:ICrudServices<Customer>
+    public interface IPaymentService : ICrudServices<Payment>
     {
-        IDataResult<List<CustomerDetailDto>> GetCustomerDetailService();
-        IResult UpdateBalance(Customer customer, decimal cashAmount);
+        IResult CashTransaction(RentOrderDto rentOrder);
     }
 }

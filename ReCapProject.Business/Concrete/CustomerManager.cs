@@ -64,5 +64,16 @@ namespace ReCapProject.Business.Concrete
             }
             return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails(), CustomerMessages.CustomersListed);
         }
+
+        public IResult UpdateBalance(Customer customer, decimal cashAmount)
+        {
+            if (cashAmount < 150)
+            {
+                return new ErrorResult(CustomerMessages.AmountUnderMinLimit);
+            }
+
+            customer.Balance += cashAmount;
+            return new SuccessResult(CustomerMessages.SuccessfulBalanceUpdate);
+        }
     }
 }
