@@ -10,6 +10,6 @@ namespace ReCapProject.Business.Abstract
 {
     public interface IPaymentService : ICrudServices<Payment>
     {
-        IResult CashTransaction(RentOrderDto rentOrder);
+        IResult CashTransaction(Rental rental, Payment payment);
     }
 }

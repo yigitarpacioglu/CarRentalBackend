@@ -11,6 +11,7 @@ namespace ReCapProject.Business.Abstract
     public interface ICustomerService:ICrudServices<Customer>
     {
         IDataResult<List<CustomerDetailDto>> GetCustomerDetailService();
-        IResult UpdateBalance(Customer customer, decimal cashAmount);
+        IDataResult<CustomerDetailDto> GetCustomerDetailsById(int id);
+        IResult UpdateBalance(CustomerDetailDto customer, decimal cashAmount);
     }
 }

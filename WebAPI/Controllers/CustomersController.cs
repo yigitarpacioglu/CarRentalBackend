@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using ReCapProject.Business.Abstract;
 using ReCapProject.Entities.Concrete;
+using ReCapProject.Entities.DTOs;
 
 namespace WebAPI.Controllers
 {
@@ -52,16 +53,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpPost("UpdateBalance")]
-        public IActionResult Update(Customer customer)
-        {
-            var result = _customerService.UpdateService(customer);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
+      
         [HttpPost("Delete")]
         public IActionResult Delete(Customer customer)
         {
@@ -83,9 +75,19 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("UpdateBalance")]
-        public IActionResult UpdateBalance(Customer customer,decimal cashAmount)
+        public IActionResult UpdateBalance(BalanceUpdateDto balanceUpdate)
         {
-            var result = _customerService.UpdateBalance(customer,cashAmount);
+            var result = _customerService.UpdateBalance(balanceUpdate.Customer,balanceUpdate.Cash);
+            if (!result.Success)
+            {
+                return BadRequest(result);
+            }
+            return Ok(result);
+        }
+        [HttpGet("GetCustomerDetailsById")]
+        public IActionResult GetCustomerDetailsById(int id)
+        {
+            var result = _customerService.GetCustomerDetailsById(id);
             if (result.Success)
             {
                 return Ok(result);

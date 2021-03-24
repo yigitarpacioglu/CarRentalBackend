@@ -65,15 +65,32 @@ namespace ReCapProject.Business.Concrete
             return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails(), CustomerMessages.CustomersListed);
         }
 
-        public IResult UpdateBalance(Customer customer, decimal cashAmount)
+        public IResult UpdateBalance(CustomerDetailDto customer, decimal cash)
         {
-            if (cashAmount < 150)
+            
+            if (cash < 150)
             {
                 return new ErrorResult(CustomerMessages.AmountUnderMinLimit);
             }
-
-            customer.Balance += cashAmount;
+            var customerOrigin = _customerDal.Get(c => c.Id == customer.Id);
+            var customerToUpdate = new Customer()
+            {
+                Id = customer.Id,
+                Balance = customer.Balance + cash,
+                UserId = customerOrigin.UserId,
+                CompanyName = customer.CompanyName,
+            };
+            _customerDal.Update(customerToUpdate);
             return new SuccessResult(CustomerMessages.SuccessfulBalanceUpdate);
+        }
+
+        public IDataResult<CustomerDetailDto> GetCustomerDetailsById(int id)
+        {
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<CustomerDetailDto>(GeneralMessages.Maintenance);
+            }
+            return new SuccessDataResult<CustomerDetailDto>(_customerDal.GetCustomerDetailsById(c=>c.Id==id), CustomerMessages.CustomersListed);
         }
     }
 }

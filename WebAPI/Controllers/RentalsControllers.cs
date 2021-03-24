@@ -87,10 +87,10 @@ namespace WebAPI.Controllers
         [HttpPost("Payment")]
         public IActionResult CashTransaction(RentOrderDto rentOrder)
         {
-            var moneyTransaction = _paymentService.CashTransaction(rentOrder);
+            var moneyTransaction = _paymentService.CashTransaction(rentOrder.Rental,rentOrder.Payment);
             if (!moneyTransaction.Success)
             {
-                return BadRequest(moneyTransaction.Message);
+                return BadRequest(moneyTransaction);
             }
             var rentResult = _rentalService.AddService(rentOrder.Rental);
             if (!rentResult.Success)

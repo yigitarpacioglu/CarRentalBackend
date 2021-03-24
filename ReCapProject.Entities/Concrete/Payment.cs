@@ -9,7 +9,6 @@ namespace ReCapProject.Entities.Concrete
     {
         public int Id { get; set; }
         public int CustomerId { get; set; }
-        public int RentalId { get; set; }
         public decimal Amount { get; set; }
     }
 }

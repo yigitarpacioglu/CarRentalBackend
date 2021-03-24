@@ -61,15 +61,21 @@ namespace ReCapProject.Business.Concrete
             return new SuccessResult(PaymentMessages.PaymentDeleted);
         }
 
-        public IResult CashTransaction(RentOrderDto rentOrder)
+        public IResult CashTransaction(Rental rental, Payment payment)
         {
-            var customer = _customerService.GetById(rentOrder.Rental.CustomerId);
-            if (customer.Data.Balance < rentOrder.Payment.Amount)
+            var customer = _customerService.GetById(rental.CustomerId);
+            if (customer.Data.Balance < payment.Amount)
             {
                 return new ErrorResult(PaymentMessages.InsufficientFund);
             }
-            customer.Data.Balance -= rentOrder.Payment.Amount;
-
+            var customerToUpdate = new Customer
+            {
+                Id = customer.Data.Id,
+                Balance = customer.Data.Balance - payment.Amount,
+                UserId = customer.Data.UserId,
+                CompanyName = customer.Data.CompanyName,
+            };
+            _customerService.UpdateService(customerToUpdate);
             return new SuccessResult(PaymentMessages.PaymentSuccessful);
         }
     }

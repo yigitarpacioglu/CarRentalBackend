@@ -6,7 +6,7 @@ namespace ReCapProject.Business.Constants
 {
     public static class RentalMessages
     {
-        public static string RentalAdded = "Rental has been recorded to database";
+        public static string RentalAdded = "Car has has been rented succesfully";
         public static string RentalUpdated = "Rental record has been updated";
         public static string RentalDeleted = "Rental record has been removed from database";
         public static string RentalListed = "Rental Records";
