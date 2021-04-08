@@ -30,6 +30,7 @@ namespace ReCapProject.DataAccess.Concrete.EntityFramework
                         DailyPrice = c.DailyPrice,
                         ColorName = r.ColorName,
                         Description = c.Descriptions,
+                        ModelYear = c.ModelYear,
                         ImagePath = i.ImagePath
                     };
                 return result.ToList();
@@ -50,6 +51,7 @@ namespace ReCapProject.DataAccess.Concrete.EntityFramework
                         DailyPrice = c.DailyPrice,
                         ColorName = r.ColorName,
                         Description = c.Descriptions,
+                        ModelYear = c.ModelYear,
                         ImagePath = i.ImagePath
                     };
                 return result.SingleOrDefault(filter);

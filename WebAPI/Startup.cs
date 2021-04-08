@@ -17,6 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using ReCapProject.Business.Abstract;
 using ReCapProject.Business.Concrete;
 using ReCapProject.Core.DependencyResolvers;
+using ReCapProject.Core.Extensions;
 using ReCapProject.Core.Utilities.IoC;
 using ReCapProject.Core.Utilities.Security.Encryption;
 using ReCapProject.Core.Utilities.Security.Jwt;
@@ -83,6 +84,7 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.ConfigureCustomExceptionMiddleware();
 
             app.UseCors(builder=>builder.WithOrigins("http://localhost:4200").AllowAnyHeader());
 

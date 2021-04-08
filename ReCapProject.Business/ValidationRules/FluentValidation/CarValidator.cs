@@ -13,7 +13,7 @@ namespace ReCapProject.Business.ValidationRules.FluentValidation
             RuleFor(c => c.Descriptions).NotEmpty();
             RuleFor(c => c.Descriptions).MinimumLength(2);
             RuleFor(c => c.DailyPrice).GreaterThan(0);
-            RuleFor(c => c.Descriptions).Must(NotStartsWithSpace).WithMessage("Ürün adı boş karakterle başlamamalıdır.");
+            RuleFor(c => c.Descriptions).Must(NotStartsWithSpace).WithMessage("Car model MUST NOT start with space");
         }
 
         private bool NotStartsWithSpace(string arg)
