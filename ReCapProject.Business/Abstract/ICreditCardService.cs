@@ -4,12 +4,11 @@ using System.Text;
 using ReCapProject.Core.Utilities.Business;
 using ReCapProject.Core.Utilities.Results;
 using ReCapProject.Entities.Concrete;
-using ReCapProject.Entities.DTOs;
 
 namespace ReCapProject.Business.Abstract
 {
-    public interface IPaymentService : ICrudServices<Payment>
+    public interface ICreditCardService:ICrudServices<CreditCard>
     {
-        IResult CashTransaction(Rental rental, Payment payment);
+        IDataResult<CreditCard> GetByCvc(string cvc);
     }
 }

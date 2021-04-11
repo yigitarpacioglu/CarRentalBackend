@@ -16,5 +16,8 @@ namespace ReCapProject.Business.Constants
 
         public static string PaymentSuccessful =
             "Payment performed succesfully. Car pickup address will be send over SMS to your mobile phone.";
+
+        public static string CardNotExist = "This credit card is NOT valid";
+        public static string BalanceUpdated = "Your balance is updated successfully";
     }
 }

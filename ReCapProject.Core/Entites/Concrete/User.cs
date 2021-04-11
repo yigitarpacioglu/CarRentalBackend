@@ -11,5 +11,6 @@ namespace ReCapProject.Core.Entites.Concrete
         public byte[] PasswordSalt  { get; set; }
         public byte[] PasswordHash  { get; set; }
         public bool Status { get; set; }
+        public int Findex { get; set; }
     }
 }

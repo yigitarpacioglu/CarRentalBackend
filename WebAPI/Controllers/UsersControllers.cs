@@ -73,5 +73,27 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
+
+        [HttpGet("GetByEmail")]
+        public IActionResult GetByEmail(string email)
+        {
+            var result = _userService.GetByMail(email);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost("FindexAdd")]
+        public IActionResult AddFindexPoint([FromBody]int userId, int carId)
+        {
+            var result = _userService.findexOps(userId,carId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
+            return BadRequest(result);
+        }
     }
 }

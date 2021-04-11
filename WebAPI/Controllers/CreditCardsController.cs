@@ -6,48 +6,55 @@ using System.Linq;
 using System.Threading.Tasks;
 using ReCapProject.Business.Abstract;
 using ReCapProject.Entities.Concrete;
-using ReCapProject.Entities.DTOs;
 
 namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class CreditCardsController : ControllerBase
     {
-        private ICustomerService _customerService;
+        private ICreditCardService _creditCardService;
 
-        public CustomersController(ICustomerService customerService)
+        public CreditCardsController(ICreditCardService creditCardService)
         {
-            _customerService = customerService;
+            _creditCardService = creditCardService;
         }
 
         [HttpGet("GetAll")]
         public IActionResult GetAll()
         {
-            var result = _customerService.GetAllService();
+            var result = _creditCardService.GetAllService();
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-
 
         [HttpPost("Add")]
-        public IActionResult Add(Customer customer)
+        public IActionResult Add(CreditCard creditCard)
         {
-            var result = _customerService.AddService(customer);
+            var result = _creditCardService.AddService(creditCard);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-      
-        [HttpPost("Delete")]
-        public IActionResult Delete(Customer customer)
+        [HttpPost("Update")]
+        public IActionResult Update(CreditCard creditCard)
         {
-            var result = _customerService.DeleteService(customer);
+            var result = _creditCardService.UpdateService(creditCard);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+        [HttpPost("Delete")]
+        public IActionResult Delete(CreditCard creditCard)
+        {
+            var result = _creditCardService.DeleteService(creditCard);
             if (result.Success)
             {
                 return Ok(result);
@@ -57,23 +64,12 @@ namespace WebAPI.Controllers
         [HttpGet("GetById")]
         public IActionResult Get(int id)
         {
-            var result = _customerService.GetById(id);
+            var result = _creditCardService.GetById(id);
             if (result.Success)
             {
                 return Ok(result);
             }
             return BadRequest(result);
         }
-        [HttpGet("GetByUserId")]
-        public IActionResult GetByUserId(int userId)
-        {
-            var result = _customerService.GetByUserId(userId);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
     }
 }

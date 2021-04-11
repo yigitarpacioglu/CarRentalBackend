@@ -22,7 +22,7 @@ namespace ReCapProject.Core.Utilities.Security.Jwt
         {
             Configuration = configuration; //TokenOption info read via constructors
             _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
-            _accessTokenExpiration = DateTime.Now.AddMinutes(_tokenOptions.AccessTokenExpiration);
+            _accessTokenExpiration = DateTime.UtcNow.AddMinutes(_tokenOptions.AccessTokenExpiration);
 
         }
         public AccessToken CreateToken(User user, List<OperationClaim> operationClaims)
@@ -47,7 +47,7 @@ namespace ReCapProject.Core.Utilities.Security.Jwt
                 issuer: tokenOptions.Issuer,
                 audience: tokenOptions.Audience,
                 expires: _accessTokenExpiration,
-                notBefore: DateTime.Now,
+                notBefore: DateTime.UtcNow,
                 claims: SetClaims(user,operationClaims),
                 signingCredentials: signingCredentials
             );

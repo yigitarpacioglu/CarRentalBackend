@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ReCapProject.Business.Abstract;
+﻿using ReCapProject.Business.Abstract;
 using ReCapProject.Business.Constants;
-using ReCapProject.Core.Entites.Concrete;
 using ReCapProject.Core.Utilities.Results;
 using ReCapProject.DataAccess.Abstract;
+using System;
+using System.Collections.Generic;
+using System.Text;
+using ReCapProject.Core.Entites.Concrete;
 using ReCapProject.Entities.Concrete;
 
 namespace ReCapProject.Business.Concrete
@@ -13,6 +13,7 @@ namespace ReCapProject.Business.Concrete
     public class UserManager:IUserService
     {
         private IUserDal _userDal;
+        private ICarService _carService;
         private int hour=Values.hour;
 
         public UserManager(IUserDal userDal)
@@ -61,9 +62,26 @@ namespace ReCapProject.Business.Concrete
             return _userDal.GetClaims(user);
         }
 
-        public User GetByMail(string email)
+        public IDataResult<User> GetByMail(string email)
         {
-            return _userDal.Get(u => u.Email == email);
+            return new SuccessDataResult<User>(_userDal.Get(u => u.Email == email));
+        }
+
+        public IResult findexOps(int userId, int carId)
+        {
+            User user = GetById(userId).Data;
+            Car car = _carService.GetById(carId).Data;
+
+            if (user.Findex > 1900) {
+                return new ErrorResult(UserMessages.FindexLimitIsExceed);
+            }
+            if (user.Findex<car.Findex)
+            {
+                return new ErrorResult(UserMessages.FindexNotEnough);
+            }
+            user.Findex += 125;
+            UpdateService(user);
+            return new SuccessResult(UserMessages.FindexIncreased);
         }
     }
 }

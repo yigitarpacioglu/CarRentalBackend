@@ -55,11 +55,25 @@ Date datetime,
 foreign key(CarId) References Cars(CarId),
 )
 
-alter table Customers
-add Balance decimal;
+CREATE TABLE CreditCards(
+Id int primary key identity(1,1),
+UserId int,
+CardNumber int,
+FirstName varchar(50),
+LastName varchar(50),
+ExpirationDate datetime,
+CVC int,
+Balance decimal,
+foreign key (UserId) References Users(Id)
+)
 
-truncate table Users
+alter table CreditCards
+alter column cvc varchar(5);
 
+truncate table Customers
+
+ALTER TABLE Rentals
+ADD FOREIGN KEY (CustomerId) REFERENCES Customers(Id);
 
 
 

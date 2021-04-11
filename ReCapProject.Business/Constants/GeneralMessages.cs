@@ -14,7 +14,7 @@ namespace ReCapProject.Business.Constants
         public static string SuccesfulLogin="Succesfully login to system";
         public static string UserAlreadyExists="User is already registered in the system";
         public static string UserRegistered ="User registered successfully";
-        public static string AccessTokenCreated="Access token has been created successfully";
+        public static string AccessTokenCreated="User logged in succesfully, welcome";
         internal static string AuthorizationDenied="There is not such access identified for user";
     }
 }

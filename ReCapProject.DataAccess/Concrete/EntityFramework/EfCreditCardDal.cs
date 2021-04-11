@@ -7,7 +7,7 @@ using ReCapProject.Entities.Concrete;
 
 namespace ReCapProject.DataAccess.Concrete.EntityFramework
 {
-    public class EfPaymentDal:EfEntityRepositoryBase<Payment,CarRentalDbContext>,IPaymentDal
+    public class EfCreditCardDal:EfEntityRepositoryBase<CreditCard,CarRentalDbContext>, ICreditCardDal
     {
     }
 }

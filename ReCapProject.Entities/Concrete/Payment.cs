@@ -7,8 +7,7 @@ namespace ReCapProject.Entities.Concrete
 {
     public class Payment:IEntity
     {
-        public int Id { get; set; }
-        public int CustomerId { get; set; }
         public decimal Amount { get; set; }
+        public CreditCard CreditCard { get; set; }
     }
 }

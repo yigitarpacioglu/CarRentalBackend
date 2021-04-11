@@ -47,17 +47,18 @@ namespace ReCapProject.Business.Concrete
                 return new ErrorDataResult<User>(GeneralMessages.UserNotFound);
             }
 
-            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.PasswordHash, userToCheck.PasswordSalt))
+            if (!HashingHelper.VerifyPasswordHash(userForLoginDto.Password, userToCheck.Data.PasswordHash, userToCheck.Data.PasswordSalt))
             {
                 return new ErrorDataResult<User>(GeneralMessages.PasswordError);
             }
 
-            return new SuccessDataResult<User>(userToCheck, GeneralMessages.SuccesfulLogin);
+            return new SuccessDataResult<User>(userToCheck.Data, GeneralMessages.SuccesfulLogin);
         }
 
         public IResult UserExists(string email)
         {
-            if (_userService.GetByMail(email)!=null)
+            var query = _userService.GetByMail(email);
+            if (query.Data!=null)
             {
                 return new ErrorResult(GeneralMessages.UserAlreadyExists);
             }

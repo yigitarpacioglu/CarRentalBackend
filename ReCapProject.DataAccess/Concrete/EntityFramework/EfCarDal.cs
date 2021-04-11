@@ -31,6 +31,7 @@ namespace ReCapProject.DataAccess.Concrete.EntityFramework
                         ColorName = r.ColorName,
                         Description = c.Descriptions,
                         ModelYear = c.ModelYear,
+                        Findex = c.Findex,
                         ImagePath = i.ImagePath
                     };
                 return result.ToList();

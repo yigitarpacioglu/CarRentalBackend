@@ -6,7 +6,7 @@ using ReCapProject.Entities.Concrete;
 
 namespace ReCapProject.DataAccess.Abstract
 {
-    public interface IPaymentDal:IEntityRepository<Payment>
+    public interface ICreditCardDal:IEntityRepository<CreditCard>
     {
     }
 }

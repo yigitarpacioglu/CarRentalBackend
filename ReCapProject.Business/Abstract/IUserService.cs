@@ -1,15 +1,17 @@
 ﻿using System;
+using ReCapProject.Core.Entites.Concrete;
+using ReCapProject.Core.Utilities.Results;
 using System.Collections.Generic;
 using System.Text;
-using ReCapProject.Core.Entites.Concrete;
 using ReCapProject.Core.Utilities.Business;
-using ReCapProject.Entities.Concrete;
+
 
 namespace ReCapProject.Business.Abstract
 {
     public interface IUserService:ICrudServices<User>
     {
         List<OperationClaim> GetClaims(User user);
-        User GetByMail(string email);
+        IDataResult<User> GetByMail(string email);
+        IResult findexOps(int userId, int carId);
     }
 }

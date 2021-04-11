@@ -15,11 +15,11 @@ namespace WebAPI.Controllers
     public class RentalsController : ControllerBase
     {
         private IRentalService _rentalService;
-        private IPaymentService _paymentService;
-        public RentalsController(IRentalService rentalService, IPaymentService paymentService)
+        private IFakeBankService _bankService;
+        public RentalsController(IRentalService rentalService, IFakeBankService bankService)
         {
             _rentalService = rentalService;
-            _paymentService = paymentService;
+            _bankService = bankService;
         }
 
         [HttpGet("GetAll")]
@@ -84,10 +84,10 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpPost("Payment")]
+        [HttpPost("payment")]
         public IActionResult CashTransaction(RentOrderDto rentOrder)
         {
-            var moneyTransaction = _paymentService.CashTransaction(rentOrder.Rental,rentOrder.Payment);
+            var moneyTransaction = _bankService.CashTransaction(rentOrder.Payment);
             if (!moneyTransaction.Success)
             {
                 return BadRequest(moneyTransaction);

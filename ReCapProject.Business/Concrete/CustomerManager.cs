@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
 using ReCapProject.Business.Abstract;
 using ReCapProject.Business.Constants;
 using ReCapProject.Core.Utilities.Results;
@@ -37,11 +38,25 @@ namespace ReCapProject.Business.Concrete
             }
             return new SuccessDataResult<Customer>(_customerDal.Get(c=>c.Id==id), CustomerMessages.CustomersListed); 
         }
+        public IDataResult<Customer> GetByUserId(int userId)
+        {
+            if (DateTime.Now.Hour == hour)
+            {
+                return new ErrorDataResult<Customer>(GeneralMessages.Maintenance);
+            }
+            return new SuccessDataResult<Customer>(_customerDal.Get(c => c.UserId == userId), CustomerMessages.CustomersListed);
+        }
 
         public IResult AddService(Customer entity)
         {
+            var query = IsCustomerExist(entity.UserId);
+            if (!query.Success)
+            {
+                return new ErrorResult(query.Message);
+            }
             _customerDal.Add(entity);
-            return new SuccessResult(CustomerMessages.CustomerAdded);
+            return new SuccessResult(CustomerMessages.RedirectingToPayment);
+
         }
 
         public IResult UpdateService(Customer entity)
@@ -56,41 +71,15 @@ namespace ReCapProject.Business.Concrete
             return new SuccessResult(CustomerMessages.CustomerDeleted);
         }
 
-        public IDataResult<List<CustomerDetailDto>> GetCustomerDetailService()
+        public IResult IsCustomerExist(int userId)
         {
-            if (DateTime.Now.Hour == hour)
+            var query = GetByUserId(userId).Data;
+            if (query != null)
             {
-                return new ErrorDataResult<List<CustomerDetailDto>>(GeneralMessages.Maintenance);
+                return new ErrorResult();
             }
-            return new SuccessDataResult<List<CustomerDetailDto>>(_customerDal.GetCustomerDetails(), CustomerMessages.CustomersListed);
-        }
 
-        public IResult UpdateBalance(CustomerDetailDto customer, decimal cash)
-        {
-            
-            if (cash < 150)
-            {
-                return new ErrorResult(CustomerMessages.AmountUnderMinLimit);
-            }
-            var customerOrigin = _customerDal.Get(c => c.Id == customer.Id);
-            var customerToUpdate = new Customer()
-            {
-                Id = customer.Id,
-                Balance = customer.Balance + cash,
-                UserId = customerOrigin.UserId,
-                CompanyName = customer.CompanyName,
-            };
-            _customerDal.Update(customerToUpdate);
-            return new SuccessResult(CustomerMessages.SuccessfulBalanceUpdate);
-        }
-
-        public IDataResult<CustomerDetailDto> GetCustomerDetailsById(int id)
-        {
-            if (DateTime.Now.Hour == hour)
-            {
-                return new ErrorDataResult<CustomerDetailDto>(GeneralMessages.Maintenance);
-            }
-            return new SuccessDataResult<CustomerDetailDto>(_customerDal.GetCustomerDetailsById(c=>c.Id==id), CustomerMessages.CustomersListed);
+            return new SuccessResult();
         }
     }
 }

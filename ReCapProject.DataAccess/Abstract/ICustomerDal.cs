@@ -11,7 +11,6 @@ namespace ReCapProject.DataAccess.Abstract
 {
     public interface ICustomerDal: IEntityRepository<Customer>
     {
-        List<CustomerDetailDto> GetCustomerDetails(Expression<Func<Customer, bool>> filter = null);
-        CustomerDetailDto GetCustomerDetailsById(Expression<Func<Customer, bool>> filter);
+
     }
 }
